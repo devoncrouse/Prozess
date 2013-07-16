@@ -1,4 +1,4 @@
-var Producer = require('./lib/Producer');
+var Producer = require('../lib/Producer');
 
 var producer = new Producer('social', {host : 'localhost'});
 producer.connect()

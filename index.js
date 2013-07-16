@@ -2,6 +2,7 @@ var dir = './lib/';
 if (process.env.PROZESS_COVERAGE){
   var dir = './lib-cov/';
 }
+exports.Zookeeper = require(dir + 'Zookeeper');
 exports.Producer = require(dir + 'Producer');
 exports.Consumer = require(dir + 'Consumer');
 exports.Message = require(dir + 'Message');
