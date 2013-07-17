@@ -37,6 +37,33 @@ setInterval(function(){
   });
 }, 1000);
 ```
+##Zookeeper consumer example:
+
+```javascript
+var Zookeeper = require('Prozess').Zookeeper;
+var zk = new Zookeeper({
+  host: 'kafka00.lan',
+  port: 2181
+});
+
+var onMessages = function(messages, error, cb) {
+  if (error) return console.error(error);
+  console.log('Received %d messages', messages.length);
+
+  // true  - (Acknowlege) Update Zk offsets and continue consuming
+  // false - (Fail) Resend the same batch in 5 seconds so I don't
+  //                have to put it somewhere. TODO: configure wait
+  cb(true);
+}
+
+// Start consuming
+// TODO: Support message filter function argument
+zk.consumeTopic('MessageHeaders', 'dcrouse', onMessages);
+
+// Stop consuming
+// TODO: Implement
+
+```
 
 ##Consumer example:
 
