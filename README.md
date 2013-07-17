@@ -13,7 +13,7 @@ There are two low-level clients: The Producer and the Consumer:
 ##Producer example:
 
 ```javascript
-var Producer = require('Prozess').Producer;
+var Producer = require('prozess').Producer;
 
 var producer = new Producer('social', {host : 'localhost'});
 producer.connect();
@@ -39,8 +39,9 @@ setInterval(function(){
 ```
 ##Zookeeper consumer example:
 
+A `Zookeeper` object handles broker enumeration and offset storage
 ```javascript
-var Zookeeper = require('Prozess').Zookeeper;
+var Zookeeper = require('prozess').Zookeeper;
 var zk = new Zookeeper({
   host: 'kafka00.lan',
   port: 2181
@@ -50,7 +51,7 @@ var onMessages = function(messages, error, cb) {
   if (error) return console.error(error);
   console.log('Received %d messages', messages.length);
 
-  // true  - (Acknowlege) Update Zk offsets and continue consuming
+  // true  - (Acknowledge) Update Zk offsets and continue consuming
   // false - (Fail) Resend the same batch in 5 seconds so I don't
   //                have to put it somewhere. TODO: configure wait
   cb(true);
@@ -68,7 +69,7 @@ zk.consumeTopic('MessageHeaders', 'dcrouse', onMessages);
 ##Consumer example:
 
 ```javascript
-var Consumer = require('Prozess').Consumer;
+var Consumer = require('prozess').Consumer;
 
 var options = {host : 'localhost', topic : 'social', partition : 0, offset : 0};
 var consumer = new Consumer(options);
